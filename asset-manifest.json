@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/blog/static/css/main.32400ae7.css",
-    "main.js": "/blog/static/js/main.a1e6bb69.js",
+    "main.js": "/blog/static/js/main.53fb934e.js",
     "static/media/gdnet.png": "/blog/static/media/gdnet.d2a2271957e49a4a514e.png",
     "static/media/deeplearning.png": "/blog/static/media/deeplearning.fb78132e10173a76d378.png",
     "static/media/sastranet.png": "/blog/static/media/sastranet.d378362a5eac5d07d2ea.png",
@@ -15,10 +15,10 @@
     "static/media/linked-in.svg": "/blog/static/media/linked-in.394b6e3558ae07ec61acf961d784d622.svg",
     "static/media/send.svg": "/blog/static/media/send.4acb5465e43a37cafc3620638ba3abf8.svg",
     "main.32400ae7.css.map": "/blog/static/css/main.32400ae7.css.map",
-    "main.a1e6bb69.js.map": "/blog/static/js/main.a1e6bb69.js.map"
+    "main.53fb934e.js.map": "/blog/static/js/main.53fb934e.js.map"
   },
   "entrypoints": [
     "static/css/main.32400ae7.css",
-    "static/js/main.a1e6bb69.js"
+    "static/js/main.53fb934e.js"
   ]
 }
