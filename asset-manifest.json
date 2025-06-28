@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/blog/static/css/main.93302780.css",
-    "main.js": "/blog/static/js/main.a5bff37e.js",
+    "main.css": "/blog/static/css/main.a73e6087.css",
+    "main.js": "/blog/static/js/main.2a2c6943.js",
     "static/media/gdnet.png": "/blog/static/media/gdnet.d2a2271957e49a4a514e.png",
     "static/media/deeplearning.png": "/blog/static/media/deeplearning.fb78132e10173a76d378.png",
     "static/media/icon.ico": "/blog/static/media/icon.bedafcd2186f2e30e949.ico",
@@ -12,15 +12,18 @@
     "static/media/mindful.png": "/blog/static/media/mindful.efc2a9db88ab2bfb1a08.png",
     "static/media/helloworld.png": "/blog/static/media/helloworld.8a52c902e454f1d9cf9f.png",
     "static/media/github.svg": "/blog/static/media/github.68fbfbdc125b03af0278b575fd7c326b.svg",
+    "static/media/java.svg": "/blog/static/media/java.f29053ceedb8b855fc1fe3b1c1c4e0a9.svg",
+    "static/media/Python.svg": "/blog/static/media/Python.5b929ed67c6543824987a15ca321acc9.svg",
     "static/media/leetcode.svg": "/blog/static/media/leetcode.a33aa94f7b15a4662c7cdfe98ddd9090.svg",
     "index.html": "/blog/index.html",
     "static/media/linked-in.svg": "/blog/static/media/linked-in.394b6e3558ae07ec61acf961d784d622.svg",
     "static/media/send.svg": "/blog/static/media/send.4acb5465e43a37cafc3620638ba3abf8.svg",
-    "main.93302780.css.map": "/blog/static/css/main.93302780.css.map",
-    "main.a5bff37e.js.map": "/blog/static/js/main.a5bff37e.js.map"
+    "static/media/download.svg": "/blog/static/media/download.9bbbf07f572aa65fbf8029d40dc808e7.svg",
+    "main.a73e6087.css.map": "/blog/static/css/main.a73e6087.css.map",
+    "main.2a2c6943.js.map": "/blog/static/js/main.2a2c6943.js.map"
   },
   "entrypoints": [
-    "static/css/main.93302780.css",
-    "static/js/main.a5bff37e.js"
+    "static/css/main.a73e6087.css",
+    "static/js/main.2a2c6943.js"
   ]
 }
