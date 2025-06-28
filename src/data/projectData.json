@@ -4,7 +4,7 @@
         "title": "Simple Deep Learning Module named GDnet",
         "description": "An educational recreation of top deep learning libraries like TensorFlow and PyTorch, built from scratch without high-level optimizations.",
         "thumbnail": "gdnet.png",
-        "url": "https://github.com/Ghua8088/GDnet"
+        "url": "#/projects/gdnet"
     },
     {
         "id": "sastranet",

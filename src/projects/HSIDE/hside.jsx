@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import './HSIDE.css';
 import icon from './icon.ico';
+import github from '../../assets/icons/github.svg';
+import java from '../../assets/icons/java.svg';
+import download from '../../assets/icons/download.svg';
 import ui from './UI.png';
 function HSIDE() {
   const [release, setRelease] = useState(null);
@@ -16,7 +19,7 @@ function HSIDE() {
     <div className="hside-wrapper">
       <header className="hside-nav">
         <div className="logo-box">
-          <img src={icon} alt="HSIDE Icon" className="hside-icon" />
+          <img src={icon} alt="icons" className="icons" />
           <span className="logo-text">HSIDE</span>
         </div>
         {release?.assets?.length > 0 && (
@@ -26,13 +29,13 @@ function HSIDE() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            ⬇ Get HSIDE ({release.tag_name})
+            <img src ={download} alt="Download" className="icons" /> HSIDE ({release.tag_name})   
           </a>
         )}
       </header>
 
       <main className="hero">
-        <h1 className="hero-heading">Code Java at Lightspeed ⚡</h1>
+        <h1 className="hero-heading">Coded in Java for speed with old fashion UI<img src={java} alt="Java" className="icons" /></h1>
         <p className="hero-desc">
           HSIDE is a modern AI-powered Java IDE that feels as lightweight as Notepad — with the intelligence of an assistant.
         </p>
@@ -44,7 +47,7 @@ function HSIDE() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            🪄 Download for Windows
+            <img src={download} alt="Download" className="icon" /> Download for Windows
           </a>
         )}
         <p className="compatibility-note">Supports Windows 10 & above</p>
@@ -55,7 +58,13 @@ function HSIDE() {
         <div className="platforms-row">
           <span className="platform-chip coming-soon">macOS (coming soon)</span>
           <span className="platform-chip available">Linux (Jar)</span>
-          <span className="platform-chip available">Repositry</span>
+          <a href="https://github.com/Ghua8088/HSide"className='platform-chip' target="_blank" rel="noopener noreferrer">
+            <img src={github} alt="GitHub" className="icons" style={{filter:'invert(1)'}} />
+          </a>
+          <span className="made-with">
+            made with <img src={java} alt="Java" className="icons" style={{ filter: 'invert(1)' }} />
+          </span>
+          
         </div>
       </footer>
       <div>
