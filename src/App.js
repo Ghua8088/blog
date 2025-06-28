@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -26,6 +26,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/manage" element={<BlogManager />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Container>
       <Footer />

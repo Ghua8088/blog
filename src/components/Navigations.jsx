@@ -15,6 +15,7 @@ export default function Navigations() {
             <Nav.Link as={Link} to="/" className="nav-link-underline">Home</Nav.Link>
             <Nav.Link as={Link} to="/blogs" className="nav-link-underline">Blog</Nav.Link>
             <Nav.Link as={Link} to="/contact" className="nav-link-underline">Contact</Nav.Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
