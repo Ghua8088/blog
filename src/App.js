@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigations from './components/Navigations';
 import { Container } from 'react-bootstrap';
 import React from 'react';
-
+import HSIDE from './projects/HSIDE/hside';
 function App() {
   return (
     <div className="App">
@@ -26,6 +26,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/manage" element={<BlogManager />} />
+          <Route path="/projects/HSIDE" element={<HSIDE />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Container>
