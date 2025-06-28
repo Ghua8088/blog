@@ -1,0 +1,38 @@
+[
+    {
+        "id": "gdnet",
+        "title": "Simple Deep Learning Module named GDnet",
+        "description": "An educational recreation of top deep learning libraries like TensorFlow and PyTorch, built from scratch without high-level optimizations.",
+        "thumbnail": "gdnet.png",
+        "url": "https://github.com/Ghua8088/GDnet"
+    },
+    {
+        "id": "sastranet",
+        "title": "Sastranet",
+        "description": "An all-in-one mobile platform made by the Sastranet team at SASTRA University to help students with everything from academics to life on campus.",
+        "thumbnail": "sastranet.png",
+        "url": "https://play.google.com/store/apps/details?id=com.ahmedbaari.sastranet"
+    },
+    {
+        "id": "graph-visualization",
+        "title": "Graph Visualization",
+        "description": "A web-based shortest-path visualizer using a custom Dijkstra-like algorithm, implemented with Python and Django, and hosted on Render.com.",
+        "thumbnail": "graphviz.png",
+        "url": "https://mapapp-n1nz.onrender.com/"
+    },
+    {
+        "id": "HSIDE",
+        "title": "IDE made in Java simple and clean.",
+        "description": "A simple IDE that has AI and running on device using Ollama made in Java",
+        "thumbnail": "HSIDE.png",
+        "url": "https://github.com/Ghua8088/HSide"
+        
+    },
+    {
+        "id":"mindful",
+        "title":"Mindful",
+        "description":"A web extension that converts your browser into a mindfulness tool and helps you stay focused on the task at hand.",
+        "thumbnail":"mindful.png",
+        "url":"https://github.com/Ghua8088/Mindful"
+    }
+]
