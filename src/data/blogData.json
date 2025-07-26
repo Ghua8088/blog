@@ -214,7 +214,7 @@
     "id": "gdnet-project-overview",
     "title": "GDnet Project Overview",
     "date": "2025-06-28",
-    "description": "How i made my minimalistic educational  Deep Learning framework using cupy for GPU acceleration",
+    "description": "How I made my minimalistic educational Deep Learning framework using CuPy for GPU acceleration",
     "thumbnail": "deeplearning.png",
     "content": {
       "sections": [
@@ -224,63 +224,296 @@
         },
         {
           "type": "paragraph",
-          "content": "I always wanted to understand how deep learning frameworks like TensorFlow or PyTorch really work under the hood. So I dived into the math and quickly whipped up a basic NumPy-based neural net. At first, I thought, “This is a piece of cake — just W·X + B and boom, you're done.”\n\nThat was just the forward pass.\n\nThen came backpropagation. And holy hell — the math hit hard. That’s where the real magic lies. It's the silent engine powering every model you’ve ever used, and it nearly broke me at first.\n\nOnce I wrapped my head around it, implementing layers was easy — just more neurons bundled together, abstracted into units. But then I stumbled upon batching. I had no clue what it was… until my simple model took 10 minutes on basic datasets. Turns out batching wasn’t optional — it was critical.\n\nThis was just the beginning!"
+          "content": "I always wanted to understand how deep learning frameworks like TensorFlow or PyTorch really worked. So I dove into the math and wrote a basic NumPy-based neural net.\n\nAt first, I thought: “Easy — just W·X + B and boom, done.”\n\nThat was just the forward pass.\n\nThen came backpropagation — and the math nearly broke me. That’s where the real magic is. Once I understood it, building layers was straightforward — just abstracted groups of neurons.\n\nThen came batching. I had no clue what it was… until my model took 10 minutes per epoch. Turns out, batching wasn’t optional — it was necessary.\n\nThat was just the beginning!"
         },
         {
           "type": "heading",
-          "content": "Sucess ! or so I thought , Mnist came back with 95% accuracy 🤯 "
+          "content": "Success!? MNIST came back with 95% accuracy 🤯"
         },
         {
           "type": "paragraph",
-          "content": "I was like — wow, this is insane. How did I even pull that off? That dopamine hit was real. The feeling? Absolutely wild.\n\nI was chasing 100% accuracy like a madman. At that point, I had only implemented basic stuff: batching, DenseLayer, ReLU, and Softmax. But as I kept reading, I stumbled on CNNs — and every post said they give way better accuracy.\n\nSo, high on that dopamine rush, I dove headfirst into convolutional layers.\n\nDebugging the math behind kernels was brutal. I had a rough idea of how they worked, but implementing them was a whole different beast. I took a peek at some open-source examples online and pieced things together. But it got crazy real fast — I ended up with a 5-deep for-loop 💀, and unsurprisingly, training time exploded to 5+ hours on simple data.\n\nThat’s when I knew — I had to vectorize the operations. I tried with NumPy... and yeah, that didn’t go as planned either 😵‍💫."
+          "content": "I was shocked — 95% accuracy on MNIST! Total dopamine rush. I had only implemented basic layers: Dense, ReLU, Softmax, and batching.\n\nThen I discovered CNNs. Everyone said they boosted accuracy, so I jumped in.\n\nImplementing convolutions was chaos. I kinda understood the theory, but putting it into code? Painful. I ended up writing a 5-deep for-loop 😵. Training time exploded to 5+ hours.\n\nI knew I had to vectorize it. Tried using NumPy — didn’t go well."
         },
         {
           "type": "heading",
-          "content": "Roadblock !? how to stand on the shoulders of gaints"
+          "content": "Roadblock?! How to stand on the shoulders of giants"
         },
         {
           "type": "paragraph",
-          "content": "I was like — how the hell are these guys running convolutions so fast in TensorFlow?!\n\nMy framework was taking 20 minutes per epoch on MNIST, and meanwhile, TF blazed through in 1 second. I thought my implementation was broken. Then I looked deeper.\n\nTurns out... these guys are CHEATERS 😤\nThey offload everything to C/C++ under the hood — kernels, matrix ops, convolutions, all optimized to the max.\n\nI couldn’t match that firepower directly, so yeah... I “cheated” too.\n\nI plugged in PyTorch convolutions to speed things up, but to be fair — I still implemented other low-level stuff myself, like im2col and col2im, to optimize my pipeline.\n\nAnd guess what?\n\nAfter all that madness — I hit 98% accuracy on MNIST. 🤯\nThat moment was pure validation. It felt like standing on the shoulders of giants… while wearing my own hacked-together shoes."
+          "content": "I kept wondering how frameworks like TensorFlow were so fast.\n\nMy code took 20 minutes per epoch on MNIST — TF? One second.\n\nI realized they weren’t cheating — just optimizing everything under the hood in C/C++.\n\nSo I 'cheated' too: I used PyTorch convolutions. But I still implemented im2col, col2im, and optimized other internals myself.\n\nAnd after all that?\n\n98% accuracy on MNIST. Felt like standing on the shoulders of giants… while wearing DIY shoes."
         },
         {
           "type": "heading",
-          "content": "So I implemented this , wheres the result moment hit me ?"
+          "content": "So I implemented this — when did the reality hit?"
         },
         {
           "type": "paragraph",
-          "content": "I was hyped. I had just built a model that hit 98% accuracy on MNIST. Naturally, I thought: \"Let’s see this beast in action!\"\n\nSo I quickly whipped up a simple Tkinter interface to test it with my own handwriting. I was expecting the model to easily get 9 out of 10 digits right.\n\nTurns out... I was completely wrong.\n\nThe model choked. It performed terribly.\n\nThat’s when it hit me — this was one of those moments. High accuracy on clean test data doesn’t always mean good real-world performance.\n\nSo I dove into production-related ML concepts and found out about data augmentation — subtly modifying inputs to make the model more robust and avoid overfitting.\n\nImplementing some of it was chill — flips, shifts, rotations. But zooming? That one gave me a headache 💀\n\nStill, it worked like a charm. After retraining with augmented data, my accuracy dropped slightly to 96.9%, but the model started generalizing way better.\n\nAnd finally, yes — it got 9/10 digits correct.\n\n🥳 Redemption.\n"
+          "content": "I was hyped. 98% on MNIST.\n\nSo I built a Tkinter UI and tried testing it with my own handwriting.\n\nThe model failed. Badly.\n\nThat’s when it hit me — test accuracy doesn’t mean real-world accuracy.\n\nI dove into production ML concepts and found data augmentation. Implementing flips, shifts, and rotations was fine. Zooming? Absolute nightmare 💀\n\nBut it worked. After retraining, accuracy dropped to 96.9%, but generalization massively improved.\n\nNow it was correctly predicting 9/10 digits.\n\n🥳 Redemption."
         },
         {
           "type": "heading",
-          "content": "Next Steps ? language processing ✔️"
+          "content": "Next steps? Language processing ✔️"
         },
         {
           "type": "paragraph",
-          "content": "After a while, I got bored of image stuff — MNIST, EMNIST... meh. So I thought, “Why not expand to a new domain?”\n\nThat’s when I jumped into NLP. I built a quick TextManager class that used TfidfVectorizer to convert text into numbers. It was simple enough.\n\nSo I grabbed a dataset from Kaggle[https://www.kaggle.com/search], aiming to classify whether a piece of text contained hate speech or not. Easy, right? I already had Softmax, CrossEntropy, and the works from my earlier models.\n\nThen came the chaos.\n\nI tested it — and no matter what I typed, the model kept saying it was hate speech 😐\n\nI was confused. Like... what is this model on?!\n\nEventually, I asked the real MVP — ChatGPT — and it hit me with a new word: Class Imbalance. Turns out my dataset had an 85:15 ratio, with 85% of entries labeled as hate speech.\n\nThe dataset was scraped from Twitter.\nWhat did I expect 😔\n\nI learned that in such cases, your model can easily learn to just say “hate” for everything and still get high accuracy. I tried using class weights, tweaking loss functions — but even then, I couldn’t push accuracy beyond 20% on non-hate examples.\n\nThat’s when I realized... NLP isn’t just image classification with words.\nThere’s too much math. Too much chaos.\n\nAnd with that, I temporarily retired my NLP dreams. 🪦"
+          "content": "I got bored of image data. MNIST, EMNIST — all felt the same.\n\nSo I jumped into NLP. Built a `TextManager` using `TfidfVectorizer` to convert text to numbers.\n\nI grabbed a Kaggle dataset to classify hate speech. Since I already had Softmax and CrossEntropy, it felt easy.\n\nThen it all broke.\n\nNo matter what I typed — the model always said “hate speech.”\n\nTurns out the dataset was 85% hate, 15% normal. Total class imbalance.\n\nI learned a tough lesson: NLP isn’t image classification with words. I tried using class weights, tweaking losses — but nothing pushed accuracy past 20% on non-hate examples.\n\nSo yeah… NLP dreams postponed. 🪦"
         },
         {
           "type": "heading",
-          "content": "Idk anymore Focussed on other projects for a while\n"
+          "content": "Idk anymore. Focused on other projects for a while"
         },
         {
           "type": "paragraph",
-          "content": "After a break, I came full circle — back to working on GDNet. But after a rough loss, I wasn’t sure what to do next.\n\nThat’s when I remembered a side project I had left hanging: weather prediction.\n\nSo I jumped into time series analysis. Learned about RNNs and LSTMs — don’t mind my tech jargon 😎. It was honestly a fun way to get back into things. I wrapped up that project, feeling good...\n\n...until YouTube betrayed me.\n\nRight after finishing the LSTM model, I got hit with:\n\n“Why RNNs Are Bad?”\n\n“What Replaced LSTMs?”\n\nARE YOU KIDDING ME, YouTube? Why didn’t you show me this before?! 😭\n\nAnyway, I watched those, and that’s when I got introduced to attention layers — and of course, \"Attention is All You Need\".\n\nThat paper? 🔥 Wild. I dove into it, and with some help from online resources, I started building my own Transformer blocks, including things like MultiHeadAttentionLayer, feedforward layers, layer norms, the whole setup.\n\nI was excited again. Maybe... just maybe... I could build my own mini GPT at home.\n\nI already knew the kind of compute power required for LLMs, but that didn’t stop me. I trained a tiny version:\n\n~100k tokens\n\n~30k vocab\n\n~10 epochs\n\nAccuracy: ~30%\n\nEstimated time to train a “real” one: 67 days 💀\n\nTo squeeze out more performance, I even started looking into optimization techniques like matrix decomposition — especially for the value matrix in attention — to reduce computational overhead. Helped a bit, but not miracle-level.\n\nFeeling confident, I tried showing off how modular my framework had become by re-implementing my CNN model... but guess what?\n\nIt completely broke.\n\nTurns out my “framework” was just a single 1.1k-line Python file stitched together with dreams and duct tape 😂\n\nThe End!?\nMaybe. Maybe not. 💀"
+          "content": "After a break, I circled back to GDNet. But I was kinda lost.\n\nThen I remembered a side project — weather prediction.\n\nTime series seemed fun, so I learned about RNNs and LSTMs. Wrote a full LSTM model.\n\nFelt great… until YouTube betrayed me with:\n\n“Why RNNs Are Bad?”\n\n“What Replaced LSTMs?”\n\nI watched them and learned about **Attention** — and the legendary paper, “Attention Is All You Need.”\n\nI was hooked.\n\nI built Transformer blocks: MultiHeadAttention, LayerNorm, FFN, all of it.\n\nTrained a tiny GPT-like model:\n\n- 100k tokens\n- 30k vocab\n- 10 epochs\n- ~30% accuracy\n- Estimated 67 days to train a proper one 💀\n\nTried matrix decomposition on the attention layers to speed things up — worked *a little*.\n\nThen I tried reusing my CNN model...\n\nIt broke everything.\n\nMy “framework” was a 1.1k-line Python file stitched with hope 😂"
         },
         {
           "type": "heading",
-          "content": "I sat and modularized my modules for the next 5 hours "
+          "content": "I sat and modularized my modules for the next 5 hours"
         },
         {
           "type": "paragraph",
-          "content": "The pain of modularizing my framework was slightly spared since the codebase was just 1.1k lines — but don’t get me wrong, it was still painful.\n\nI sat down and refactored the whole thing, determined never to face this kind of mess again. And in the process, something clicked 🕵️: I’d been tunnel-visioned on just the layers.\n\nTurns out, there’s a whole world beyond just Dense, ReLU, and Conv2D. I had totally sidelined the importance of:\n\nOptimizers (SGD isn’t everything, shocker)\n\nDiverse activation functions\n\nAdvanced loss functions\n\nRegularization techniques\n\nSo I hit supersonic mode and started exploring them. It was honestly fun as hell. My framework finally started to feel like a real deep learning library.\n\nI’m still building and improving it — and if you’re someone interested in learning how DL frameworks work under the hood, you’re welcome to join in!\n\nThe code might be a little messy (I mean… it’s handcrafted with love 😅), but everything is readable, and most of it can be understood with a quick web search.\nLink to my REPO - gdnet [https://github.com/Ghua8088/GDnet ] check it out :)"
+          "content": "Thankfully, the whole codebase was just 1.1k lines — but refactoring still hurt.\n\nAs I cleaned up, I realized I had been obsessed with layers, and ignored the rest:\n\n- 🧠 Optimizers (SGD isn’t everything)\n- 🔢 Activation functions beyond ReLU\n- 📉 Loss functions\n- 📏 Regularization techniques\n\nSo I went all in — explored everything. The framework finally started to feel legit.\n\nIf you're curious how DL frameworks actually work — feel free to check it out!\n\nYeah, the code is messy (handcrafted with love 😅), but readable, and easy to follow with a quick web search.\n\n"
         },
         {
           "type": "heading",
-          "content": "Main Villains :"
+          "content": "Main Villains:"
         },
         {
           "type": "list",
-          "content": "🟥 ShapeMismatchError\n🔁 CuPy vs NumPy mismatch\n📡 Broadcasting errors\n😵‍💫 Random NaNs out of nowhere\n👿 Derivative of Softmax\n"
+          "content": "🟥 ShapeMismatchError\n🔁 CuPy vs NumPy mismatch\n📡 Broadcasting errors\n😵‍💫 Random NaNs out of nowhere\n👿 Derivative of Softmax"
+        },
+        {
+          "type": "link",
+          "url": "https://github.com/Ghua8088/GDnet",
+          "title": "GDnet",
+          "description": "My minimalistic educational Deep Learning framework using CuPy for GPU acceleration"
+        },
+        {
+          "type": "link",
+          "url": "/blog#/projects/gdnet",
+          "title": "Launch Page",
+          "description": "Launch Page for GDnet"
+        },
+        {
+          "type": "link",
+          "url": "https://pytorch.org",
+          "title": "PyTorch",
+          "description": "The inspiration behind GDnet's design"
+        },
+        {
+          "type": "link",
+          "url": "https://numpy.org",
+          "title": "NumPy",
+          "description": "Foundation for numerical computing in Python"
+        }
+      ]
+    }
+  },
+  {
+    "id": "sastranet-journey",
+    "title": "🚀 My Journey with the Sastranet Team: From Fan to Family",
+    "date": "2025-07-26",
+    "description": "How I joined a legendary student-led team that built an app to transform our university experience",
+    "thumbnail": "Sastranetlogo.png",
+    "content": {
+      "sections": [
+        {
+          "type": "paragraph",
+          "content": "When I first came across Sastranet, I was blown away."
+        },
+        {
+          "type": "paragraph",
+          "content": "It was a group of my seniors — third-years, already preparing for placements — who came together to build something that truly changed the student experience at our university. They saw all the pain points of living and navigating college life through outdated, clunky websites... and instead of just complaining, they did something about it."
+        },
+        {
+          "type": "paragraph",
+          "content": "Out of nowhere — boom 💥 — this clean, unified app drops, and it just explodes."
+        },
+        {
+          "type": "paragraph",
+          "content": "The downloads? Through the roof.\nThe buzz? Everywhere.\nIt quickly became the app everyone was using — students literally shifted their digital campus life into this single, beautiful platform."
+        },
+        {
+          "type": "paragraph",
+          "content": "From schedules to notices, fee updates to results, everything was finally in one place. And it wasn’t just functional — it was smooth, well-designed, and felt like it was made by people who actually understood student life."
+        },
+        {
+          "type": "paragraph",
+          "content": "That’s when I knew... This wasn’t just some side project. This was a revolution in our university tech ecosystem."
+        },
+        {
+          "type": "heading",
+          "content": "🤝 First Contact: Joining the Mission"
+        },
+        {
+          "type": "paragraph",
+          "content": "Then one day… I opened Sastranet and saw a small banner:\n“We’re expanding — second years, come join the team.”"
+        },
+        {
+          "type": "paragraph",
+          "content": "No way. Was this real? The people behind Sastranet were looking for juniors to carry the torch forward?"
+        },
+        {
+          "type": "paragraph",
+          "content": "The process began with a few rounds:"
+        },
+        {
+          "type": "heading",
+          "content": "✅ 1. Google Form (That scared off half the crowd 😭)"
+        },
+        {
+          "type": "paragraph",
+          "content": "They started with a basic form — name, year, experience… and then boom, a section for: “Any technical achievements or projects?”"
+        },
+        {
+          "type": "paragraph",
+          "content": "It freaked a lot of people out. Many assumed they weren’t “good enough” and never even submitted the form. But the Sastranet team didn’t intend to scare anyone off — they were genuinely looking for passion and interest, not polished portfolios. Still, that one section filtered out a lot 😅"
+        },
+        {
+          "type": "heading",
+          "content": "🧠 2. Coding Round: Build Fast, Build Smart"
+        },
+        {
+          "type": "paragraph",
+          "content": "Next came a timed challenge — 45 minutes to build a quick React-based UI."
+        },
+        {
+          "type": "paragraph",
+          "content": "They allowed the use of AI tools too (huge W). Most applicants focused on clean, easy sections. I, for some reason, went head-first into the complex parts first... and struggled to finish the simpler ones. But I showed them my past projects to make up for it."
+        },
+        {
+          "type": "paragraph",
+          "content": "That edge? It worked. ✅"
+        },
+        {
+          "type": "heading",
+          "content": "🧮 3. DSA Round: LeetCode Flex Time"
+        },
+        {
+          "type": "paragraph",
+          "content": "The third round was a classic DSA problem — easy-to-medium level."
+        },
+        {
+          "type": "paragraph",
+          "content": "I’d already solved 380+ problems on LeetCode (weird flex but okay 😎), so this one went smooth."
+        },
+        {
+          "type": "heading",
+          "content": "🎤 4. The Vibe Check (HR Round)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Honestly? This was the best part."
+        },
+        {
+          "type": "paragraph",
+          "content": "A super chill conversation where they tried to see if I was a good fit for the team culture. I vibe well, talk well, and they seemed to like that. And just like that… I was in. LET’S GOOOO 🎉"
+        },
+        {
+          "type": "heading",
+          "content": "🛠️ The Real Work Begins"
+        },
+        {
+          "type": "paragraph",
+          "content": "Fast-forward a bit — six of us new recruits joined the team. We started onboarding, tackling bugs, making small features, and gradually leveling up."
+        },
+        {
+          "type": "paragraph",
+          "content": "We weren’t just thrown into the fire — we had support from seniors, who were always ready to help, share time management tips, and mentor us on everything from Git branches to CI/CD pipelines of a professional product."
+        },
+        {
+          "type": "heading",
+          "content": "And the best part? The team culture."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Every opinion counts.",
+            "You can suggest, debate, and build freely — as long as it aligns with the larger roadmap.",
+            "You can take ownership, build your way, and still move as one unit."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "We laughed, debugged, panicked, and fixed things together — and honestly, it’s been one of the most growth-packed experiences of my college life so far."
+        },
+        {
+          "type": "heading",
+          "content": "🌟 Final Thoughts"
+        },
+        {
+          "type": "paragraph",
+          "content": "Sastranet isn’t just an app. It’s a movement — built by students, for students."
+        },
+        {
+          "type": "paragraph",
+          "content": "Being part of this team means more than just writing code — it’s about creating impact. It’s about solving real problems for real people around you, and doing it with a team that supports and uplifts you every step of the way."
+        },
+        {
+          "type": "paragraph",
+          "content": "I’m super grateful to be part of this journey. Here’s to what comes next. 🫡"
+        },
+        {
+          "type": "paragraph",
+          "content": "🥹 Forever proud to be a part of the Sastranet crew."
+        },
+        {
+          "type": "heading",
+          "content": "Team Members"
+        },
+        {
+          "type": "link",
+          "url": "https://linkedin.com/in/ahmedbaari",
+          "title": "Ahmed Baari — Team Lead",
+          "description": "LinkedIn profile of Ahmed Baari, the Team Lead of Sastranet."
+        },
+        {
+          "type": "link",
+          "url": "https://linkedin.com/in/hyden-j-517715249",
+          "title": "Hyden J — Developer",
+          "description": "LinkedIn profile of Hyden J"
+        },
+        {
+          "type": "link",
+          "url": "https://github.com/issacz",
+          "title": "Issac Zerubbabel — Developer",
+          "description": "GitHub profile of Issac"
+        },
+        {
+          "type": "link",
+          "url": "https://github.com/Golden-Exp",
+          "title": "Pranav K — Developer",
+          "description": "GitHub profile of Pranav K "
+        },
+        {
+          "type": "link",
+          "url": "https://www.linkedin.com/in/siddharth-abhimanyu-879223345",
+          "title": "Siddharth Abhimanyu — Developer",
+          "description": "Siddharth's LinkedIn "
+        },
+        {
+          "type": "link",
+          "url": "https://www.linkedin.com/in/niranjan-r-277972340",
+          "title": "Niranjan R — Developer",
+          "description": "Niranjan’s LinkedIn"
+        },
+        {
+          "type": "link",
+          "url": "http://www.linkedin.com/in/anagha-santosh-mangle-020315291",
+          "title": "Anagha S Mangle — Developer",
+          "description": "Anagha’s  profile on LinkedIn."
+        },
+        {
+          "type": "link",
+          "url": "https://www.linkedin.com/in/abhinav-suresh-752a22300/",
+          "title": "Abhinav S — Developer",
+          "description": "Abhinav’s LinkedIn profile "
+        },
+        {
+          "type": "link",
+          "url": "http://www.linkedin.com/in/nandha-kumar-01242929b/",
+          "title": "Nandha Kumar — Developer",
+          "description": "LinkedIn profile of Nandha Kumar."
         }
       ]
     }

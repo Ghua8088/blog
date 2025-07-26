@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import blogData from '../data/blogData.json';
+import { isValidYouTubeUrl } from '../utils/MediaLoader';
 
 export default function BlogManager() {
   const [blogs, setBlogs] = useState(blogData);
@@ -38,7 +39,7 @@ export default function BlogManager() {
   };
 
   const addSection = () => {
-    if (currentSection.content.trim()) {
+    if (currentSection.content.trim() || currentSection.type === 'image' || currentSection.type === 'audio' || currentSection.type === 'link' || currentSection.type === 'youtube') {
       let sectionToAdd = { ...currentSection };
       
       // Handle list type - convert to proper format
@@ -53,6 +54,52 @@ export default function BlogManager() {
       // Handle heading type - add level
       if (currentSection.type === 'heading') {
         sectionToAdd.level = 2;
+      }
+      
+      // Handle image type
+      if (currentSection.type === 'image') {
+        sectionToAdd = {
+          type: 'image',
+          src: currentSection.src || '',
+          alt: currentSection.alt || '',
+          caption: currentSection.caption || ''
+        };
+      }
+      
+      // Handle audio type
+      if (currentSection.type === 'audio') {
+        sectionToAdd = {
+          src: currentSection.src || '',
+          type: currentSection.audioType || 'audio/mpeg',
+          caption: currentSection.caption || ''
+        };
+      }
+      
+      // Handle link type
+      if (currentSection.type === 'link') {
+        sectionToAdd = {
+          type: 'link',
+          url: currentSection.url || '',
+          title: currentSection.title || '',
+          description: currentSection.description || ''
+        };
+      }
+      
+      // Handle YouTube type
+      if (currentSection.type === 'youtube') {
+        sectionToAdd = {
+          type: 'youtube',
+          url: currentSection.url || '',
+          title: currentSection.title || '',
+          caption: currentSection.caption || '',
+          autoplay: currentSection.autoplay || 0,
+          controls: currentSection.controls !== undefined ? currentSection.controls : 1,
+          modestbranding: currentSection.modestbranding !== undefined ? currentSection.modestbranding : 1,
+          rel: currentSection.rel !== undefined ? currentSection.rel : 0,
+          start: currentSection.start || 0,
+          end: currentSection.end || 0,
+          mute: currentSection.mute || 0
+        };
       }
       
       setNewBlog({
@@ -189,6 +236,10 @@ export default function BlogManager() {
                   <option value="heading">Heading</option>
                   <option value="list">List</option>
                   <option value="code">Code Block</option>
+                  <option value="image">Image</option>
+                  <option value="audio">Audio</option>
+                  <option value="link">Link</option>
+                  <option value="youtube">YouTube Video</option>
                 </Form.Select>
               </Form.Group>
 
@@ -203,6 +254,207 @@ export default function BlogManager() {
                     placeholder="Item 1&#10;Item 2&#10;Item 3"
                   />
                 </Form.Group>
+              ) : currentSection.type === 'image' ? (
+                <>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Image URL *</Form.Label>
+                    <Form.Control
+                      type="url"
+                      value={currentSection.src || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, src: e.target.value})}
+                      placeholder="https://example.com/image.jpg"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Alt Text</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={currentSection.alt || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, alt: e.target.value})}
+                      placeholder="Description of the image"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Caption</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={currentSection.caption || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, caption: e.target.value})}
+                      placeholder="Optional caption for the image"
+                    />
+                  </Form.Group>
+                </>
+              ) : currentSection.type === 'audio' ? (
+                <>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Audio URL *</Form.Label>
+                    <Form.Control
+                      type="url"
+                      value={currentSection.src || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, src: e.target.value})}
+                      placeholder="https://example.com/audio.mp3"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Audio Type</Form.Label>
+                    <Form.Select
+                      value={currentSection.audioType || 'audio/mpeg'}
+                      onChange={(e) => setCurrentSection({...currentSection, audioType: e.target.value})}
+                    >
+                      <option value="audio/mpeg">MP3</option>
+                      <option value="audio/wav">WAV</option>
+                      <option value="audio/ogg">OGG</option>
+                      <option value="audio/webm">WebM</option>
+                    </Form.Select>
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Caption</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={currentSection.caption || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, caption: e.target.value})}
+                      placeholder="Optional caption for the audio"
+                    />
+                  </Form.Group>
+                </>
+              ) : currentSection.type === 'link' ? (
+                <>
+                  <Form.Group className="mb-3">
+                    <Form.Label>URL *</Form.Label>
+                    <Form.Control
+                      type="url"
+                      value={currentSection.url || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, url: e.target.value})}
+                      placeholder="https://example.com"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={currentSection.title || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, title: e.target.value})}
+                      placeholder="Link title (optional)"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={2}
+                      value={currentSection.description || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, description: e.target.value})}
+                      placeholder="Brief description of the link"
+                    />
+                  </Form.Group>
+                </>
+              ) : currentSection.type === 'youtube' ? (
+                <>
+                  <Form.Group className="mb-3">
+                    <Form.Label>YouTube URL *</Form.Label>
+                    <Form.Control
+                      type="url"
+                      value={currentSection.url || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, url: e.target.value})}
+                      placeholder="https://www.youtube.com/watch?v=VIDEO_ID"
+                      isInvalid={currentSection.url && !isValidYouTubeUrl(currentSection.url)}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please enter a valid YouTube URL
+                    </Form.Control.Feedback>
+                    <Form.Text className="text-muted">
+                      Supports: youtube.com/watch?v=, youtu.be/, youtube.com/embed/, etc.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={currentSection.title || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, title: e.target.value})}
+                      placeholder="Video title (optional)"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Caption</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={currentSection.caption || ''}
+                      onChange={(e) => setCurrentSection({...currentSection, caption: e.target.value})}
+                      placeholder="Optional caption for the video"
+                    />
+                  </Form.Group>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Check
+                          type="checkbox"
+                          label="Autoplay"
+                          checked={currentSection.autoplay === 1}
+                          onChange={(e) => setCurrentSection({...currentSection, autoplay: e.target.checked ? 1 : 0})}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Check
+                          type="checkbox"
+                          label="Show Controls"
+                          checked={currentSection.controls !== 0}
+                          onChange={(e) => setCurrentSection({...currentSection, controls: e.target.checked ? 1 : 0})}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Check
+                          type="checkbox"
+                          label="Modest Branding"
+                          checked={currentSection.modestbranding !== 0}
+                          onChange={(e) => setCurrentSection({...currentSection, modestbranding: e.target.checked ? 1 : 0})}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Check
+                          type="checkbox"
+                          label="Show Related Videos"
+                          checked={currentSection.rel === 1}
+                          onChange={(e) => setCurrentSection({...currentSection, rel: e.target.checked ? 1 : 0})}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Start Time (seconds)</Form.Label>
+                        <Form.Control
+                          type="number"
+                          min="0"
+                          value={currentSection.start || 0}
+                          onChange={(e) => setCurrentSection({...currentSection, start: parseInt(e.target.value) || 0})}
+                          placeholder="0"
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group className="mb-3">
+                        <Form.Label>End Time (seconds)</Form.Label>
+                        <Form.Control
+                          type="number"
+                          min="0"
+                          value={currentSection.end || 0}
+                          onChange={(e) => setCurrentSection({...currentSection, end: parseInt(e.target.value) || 0})}
+                          placeholder="0 (no end)"
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </>
               ) : (
                 <Form.Group className="mb-3">
                   <Form.Label>Content</Form.Label>
@@ -250,6 +502,32 @@ export default function BlogManager() {
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
+                  ) : section.type === 'image' ? (
+                    <div>
+                      <p><strong>Image URL:</strong> {section.src}</p>
+                      {section.alt && <p><strong>Alt Text:</strong> {section.alt}</p>}
+                      {section.caption && <p><strong>Caption:</strong> {section.caption}</p>}
+                    </div>
+                  ) : section.type === 'audio' ? (
+                    <div>
+                      <p><strong>Audio URL:</strong> {section.src}</p>
+                      <p><strong>Type:</strong> {section.type}</p>
+                      {section.caption && <p><strong>Caption:</strong> {section.caption}</p>}
+                    </div>
+                  ) : section.type === 'link' ? (
+                    <div>
+                      <p><strong>URL:</strong> {section.url}</p>
+                      {section.title && <p><strong>Title:</strong> {section.title}</p>}
+                      {section.description && <p><strong>Description:</strong> {section.description}</p>}
+                    </div>
+                  ) : section.type === 'youtube' ? (
+                    <div>
+                      <p><strong>YouTube URL:</strong> {section.url}</p>
+                      {section.title && <p><strong>Title:</strong> {section.title}</p>}
+                      {section.caption && <p><strong>Caption:</strong> {section.caption}</p>}
+                      <p><strong>Options:</strong> Autoplay: {section.autoplay ? 'Yes' : 'No'}, Controls: {section.controls !== 0 ? 'Yes' : 'No'}, Modest Branding: {section.modestbranding !== 0 ? 'Yes' : 'No'}</p>
+                      {(section.start > 0 || section.end > 0) && <p><strong>Time Range:</strong> {section.start}s - {section.end > 0 ? section.end + 's' : 'End'}</p>}
+                    </div>
                   ) : (
                     <p>{section.content}</p>
                   )}

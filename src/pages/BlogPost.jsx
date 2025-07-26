@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import blogData from '../data/blogData.json';
+import { createMediaFallback, extractYouTubeId, createYouTubeEmbedUrl } from '../utils/MediaLoader';
 
 // Component to render different content sections
 const RenderSection = ({ section }) => {
@@ -34,6 +35,115 @@ const RenderSection = ({ section }) => {
         <pre className="blog-text">
           <code>{section.content}</code>
         </pre>
+      );
+    
+    case 'image':
+      return (
+        <div className="blog-image-container">
+          <img 
+            src={section.src} 
+            alt={section.alt || 'Blog image'} 
+            className="blog-image"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'block';
+            }}
+          />
+          <div style={{ display: 'none' }}>
+            {createMediaFallback('image', section.alt)}
+          </div>
+          {section.caption && (
+            <p className="blog-image-caption">
+              {section.caption}
+            </p>
+          )}
+        </div>
+      );
+    
+    case 'audio':
+      return (
+        <div className="blog-audio-container">
+          <audio 
+            controls 
+            preload="metadata"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'block';
+            }}
+          >
+            <source src={section.src} type={section.type || 'audio/mpeg'} />
+            Your browser does not support the audio element.
+          </audio>
+          <div style={{ display: 'none' }}>
+            {createMediaFallback('audio')}
+          </div>
+          {section.caption && (
+            <p className="blog-audio-caption">
+              {section.caption}
+            </p>
+          )}
+        </div>
+      );
+    
+    case 'link':
+      return (
+        <a 
+          href={section.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="blog-link"
+        >
+          <div className="blog-link-title">
+            {section.title || 'External Link'}
+          </div>
+          <div className="blog-link-url">
+            {section.url}
+          </div>
+          {section.description && (
+            <div className="blog-link-description">
+              {section.description}
+            </div>
+          )}
+        </a>
+      );
+    
+    case 'youtube':
+      const videoId = extractYouTubeId(section.url);
+      if (!videoId) {
+        return (
+          <div className="blog-youtube-container">
+            {createMediaFallback('youtube')}
+          </div>
+        );
+      }
+      
+      const embedUrl = createYouTubeEmbedUrl(videoId, {
+        autoplay: section.autoplay || 0,
+        controls: section.controls !== undefined ? section.controls : 1,
+        modestbranding: section.modestbranding !== undefined ? section.modestbranding : 1,
+        rel: section.rel !== undefined ? section.rel : 0,
+        start: section.start || 0,
+        end: section.end || 0,
+        mute: section.mute || 0
+      });
+      
+      return (
+        <div className="blog-youtube-container">
+          <div className="blog-youtube-wrapper">
+            <iframe
+              src={embedUrl}
+              title={section.title || 'YouTube video'}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="blog-youtube-iframe"
+            />
+          </div>
+          {section.caption && (
+            <p className="blog-youtube-caption">
+              {section.caption}
+            </p>
+          )}
+        </div>
       );
     
     default:
@@ -128,9 +238,45 @@ export default function BlogPost() {
         </div>
         
         <div className="blog-text">
-          {blog.content.sections.map((section, index) => (
-            <RenderSection key={index} section={section} />
-          ))}
+          {blog.content.sections.map((section, index) => {
+            // Check if this is a link and if the next section is also a link
+            const isLink = section.type === 'link';
+            const nextSection = blog.content.sections[index + 1];
+            const isNextLink = nextSection && nextSection.type === 'link';
+            
+            // Skip rendering if this link was already rendered as part of a group
+            if (index > 0 && blog.content.sections[index - 1].type === 'link' && section.type === 'link') {
+              return null;
+            }
+            
+            // If this is a link and the next one is also a link, render them together
+            if (isLink && isNextLink) {
+              // Find all consecutive links starting from this index
+              let linkGroup = [];
+              let i = index;
+              while (i < blog.content.sections.length && blog.content.sections[i].type === 'link') {
+                linkGroup.push(blog.content.sections[i]);
+                i++;
+              }
+              
+              // Render the link group
+              return (
+                <div key={`link-group-${index}`} className="blog-link-container">
+                  {linkGroup.map((linkSection, linkIndex) => (
+                    <RenderSection key={`link-${index + linkIndex}`} section={linkSection} />
+                  ))}
+                </div>
+              );
+            }
+            
+            // If this is a link but not part of a group, render normally
+            if (isLink) {
+              return <RenderSection key={index} section={section} />;
+            }
+            
+            // Render other content types normally
+            return <RenderSection key={index} section={section} />;
+          })}
         </div>
       </div>
     </div>
