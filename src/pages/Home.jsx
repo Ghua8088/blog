@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
   // Get the latest 3 blogs
-  const latestBlogs = blogData.slice(0, 3);
-
+  const latestBlogs = blogData.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
   return (
     <Container className="pt-5 text-light">
       <h2 className="display-4 fw-bold mb-4 Lobsterfont">Home</h2>
