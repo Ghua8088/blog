@@ -284,15 +284,15 @@
         },
         {
           "type": "link",
-          "url": "https://github.com/Ghua8088/GDnet",
-          "title": "GDnet",
-          "description": "My minimalistic educational Deep Learning framework using CuPy for GPU acceleration"
-        },
-        {
-          "type": "link",
           "url": "/blog#/projects/gdnet",
           "title": "Launch Page",
           "description": "Launch Page for GDnet"
+        },
+        {
+          "type": "link",
+          "url": "https://github.com/Ghua8088/GDnet",
+          "title": "GDnet",
+          "description": "My minimalistic educational Deep Learning framework using CuPy for GPU acceleration"
         },
         {
           "type": "link",
@@ -305,6 +305,12 @@
           "url": "https://numpy.org",
           "title": "NumPy",
           "description": "Foundation for numerical computing in Python"
+        },
+        {
+          "type": "link",
+          "url": "https://cupy.dev/",
+          "title": "Cupy",
+          "description": "GPU acceleration for NumPy"
         }
       ]
     }

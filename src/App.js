@@ -8,12 +8,14 @@ import BlogPost from './pages/BlogPost';
 import BlogManager from './pages/BlogManager';
 import Footer from './components/Footer';
 import CursorGlow from './components/CursorGlow';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigations from './components/Navigations';
 import { Container } from 'react-bootstrap';
 import React from 'react';
 import HSIDE from './projects/HSIDE/hside';
 import Gdnet from './projects/gdnet/gdnet';
+
 function App() {
   return (
     <div className="App">
@@ -33,6 +35,7 @@ function App() {
         </Routes>
       </Container>
       <Footer />
+      <PWAInstallPrompt />
     </div>
   );
 }

@@ -8,9 +8,8 @@ export default function Footer() {
             <p className="mb-0">© 2025 All rights reserved.</p>
           </Col>
           <Col md={6} className="text-md-end mt-3 mt-md-0">
-            <a href="/about" className="text-light text-decoration-none me-3">About</a>
-            <a href="/contact" className="text-light text-decoration-none me-3">Contact</a>
-            <a href="/privacy" className="text-light text-decoration-none">Privacy</a>
+            <a href="/blog#/about" className="text-light text-decoration-none me-3">About</a>
+            <a href="/blog#/contact" className="text-light text-decoration-none me-3">Contact</a>
           </Col>
         </Row>
       </Container>

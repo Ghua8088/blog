@@ -11,8 +11,12 @@
     -webkit-tap-highlight-color: transparent;
     scroll-padding: 1rem;
     caret-color: transparent;
+    caret-color: #fbe4e4;
 }
-
+*::selection{
+    background-color: #e0e0e0;
+    color: #4f4f4f;
+}
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(
