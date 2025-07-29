@@ -25,7 +25,7 @@ function Gdnet() {
 
       <main className="hero">
         <h1 className="hero-heading">
-          A Torch-level Deep Learning Framework Built From Scratch 🧠⚙️
+          A Torch-level Deep Learning Framework Built From Scratch 
         </h1>
         <p className="hero-desc">
           GDnet is a minimal, educational deep learning library—handcrafted without relying on high-level abstractions.
