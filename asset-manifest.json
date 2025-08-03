@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/blog/static/css/main.07a95cd5.css",
-    "main.js": "/blog/static/js/main.cbfb9037.js",
+    "main.css": "/blog/static/css/main.100e162f.css",
+    "main.js": "/blog/static/js/main.3d9ec589.js",
     "static/media/gdnet.png": "/blog/static/media/gdnet.d2a2271957e49a4a514e.png",
     "static/media/deeplearning.png": "/blog/static/media/deeplearning.fb78132e10173a76d378.png",
     "static/media/HSIDE.png": "/blog/static/media/HSIDE.6c321cec3f4e72d74f12.png",
@@ -19,11 +19,11 @@
     "static/media/linked-in.svg": "/blog/static/media/linked-in.394b6e3558ae07ec61acf961d784d622.svg",
     "static/media/send.svg": "/blog/static/media/send.ae2f36d7957837fbb716254c67643682.svg",
     "static/media/download.svg": "/blog/static/media/download.9bbbf07f572aa65fbf8029d40dc808e7.svg",
-    "main.07a95cd5.css.map": "/blog/static/css/main.07a95cd5.css.map",
-    "main.cbfb9037.js.map": "/blog/static/js/main.cbfb9037.js.map"
+    "main.100e162f.css.map": "/blog/static/css/main.100e162f.css.map",
+    "main.3d9ec589.js.map": "/blog/static/js/main.3d9ec589.js.map"
   },
   "entrypoints": [
-    "static/css/main.07a95cd5.css",
-    "static/js/main.cbfb9037.js"
+    "static/css/main.100e162f.css",
+    "static/js/main.3d9ec589.js"
   ]
 }
