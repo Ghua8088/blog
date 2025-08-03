@@ -30,12 +30,15 @@ body {
     color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
+    padding-top: 7rem; /* Add padding to body to account for fixed navbar */
+    scroll-padding: 7rem;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 60px 20px;
+    margin-top: 7rem; /* Add top margin to account for fixed navbar */
 }
 
 /* Header Styles */
@@ -728,12 +731,23 @@ footer {
         padding: 20px 15px !important;
         margin: 0 auto;
         max-width: 100%;
+        margin-top: 7rem !important; /* Ensure top margin on mobile */
     }
     
     /* Navigation mobile fixes */
     .navbar {
         padding: 0.25rem 0 !important;
         min-height: 50px;
+    }
+    
+    /* Adjust navbar height for mobile */
+    .cool-navbar {
+        height: 5rem !important; /* Reduce height on mobile */
+    }
+    
+    /* Adjust container margin for mobile navbar */
+    .container {
+        margin-top: 5rem !important; /* Match mobile navbar height */
     }
     
     .navbar-brand {
@@ -898,6 +912,7 @@ footer {
     body {
         overflow-x: hidden;
         width: 100%;
+        padding-top: 5rem !important; /* Adjust body padding for mobile navbar */
     }
     
     /* Fix card images on mobile */
