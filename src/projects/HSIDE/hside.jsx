@@ -10,12 +10,81 @@ import hsideLogo from '../../assets/thumbnails/HSIDE.png';
 
 function HSIDE() {
   const [release, setRelease] = useState(null);
+  const [platform, setPlatform] = useState('unknown');
 
   useEffect(() => {
+    // Detect platform
+    const detectPlatform = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      if (userAgent.includes('win')) {
+        return 'windows';
+      } else if (userAgent.includes('mac')) {
+        return 'macos';
+      } else if (userAgent.includes('linux')) {
+        return 'linux';
+      }
+      return 'unknown';
+    };
+
+    setPlatform(detectPlatform());
+
     fetch('https://api.github.com/repos/Ghua8088/HSide/releases/latest')
       .then((res) => res.json())
       .then((data) => setRelease(data));
   }, []);
+
+  // Smooth scroll function for HashRouter compatibility
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Get platform-specific download URL
+  const getPlatformSpecificDownload = () => {
+    if (!release?.assets?.length) return null;
+
+    const assets = release.assets;
+    
+    // Look for platform-specific files
+    if (platform === 'windows') {
+      // Look for .exe file first, then fallback to first asset
+      const exeAsset = assets.find(asset => 
+        asset.name.toLowerCase().includes('.exe') || 
+        asset.name.toLowerCase().includes('windows')
+      );
+      return exeAsset || assets[0];
+    } else {
+      // For macOS and Linux, look for .jar file first, then fallback to first asset
+      const jarAsset = assets.find(asset => 
+        asset.name.toLowerCase().includes('.jar') || 
+        asset.name.toLowerCase().includes('universal') ||
+        asset.name.toLowerCase().includes('cross-platform')
+      );
+      return jarAsset || assets[0];
+    }
+  };
+
+  // Get platform-specific download text
+  const getDownloadText = () => {
+    if (!release) return 'Download HSIDE';
+    
+    const asset = getPlatformSpecificDownload();
+    if (!asset) return 'Download HSIDE';
+    
+    if (platform === 'windows') {
+      return `Download HSIDE for Windows (${release.tag_name})`;
+    } else if (platform === 'macos') {
+      return `Download HSIDE for macOS (${release.tag_name})`;
+    } else if (platform === 'linux') {
+      return `Download HSIDE for Linux (${release.tag_name})`;
+    } else {
+      return `Download HSIDE (${release.tag_name})`;
+    }
+  };
+
+  const downloadAsset = getPlatformSpecificDownload();
 
   return (
     <div className="hside-wrapper">
@@ -26,9 +95,9 @@ function HSIDE() {
           <span className="logo-text">HSIDE</span>
         </div>
         <div className="nav-links">
-          <a href="#features">Features</a>
-          <a href="#ai-capabilities">AI Features</a>
-          <a href="#download">Download</a>
+          <button onClick={() => scrollToSection('features')} className="nav-link-btn">Features</button>
+          <button onClick={() => scrollToSection('ai-capabilities')} className="nav-link-btn">AI Features</button>
+          <button onClick={() => scrollToSection('download')} className="nav-link-btn">Download</button>
           <a href="https://github.com/Ghua8088/HSide" target="_blank" rel="noopener noreferrer">
             <img src={github} alt="GitHub" className="nav-icon" />
           </a>
@@ -45,20 +114,20 @@ function HSIDE() {
             The new purpose-built Java IDE with built-in AI to harness magic
           </p>
           <div className="hero-buttons">
-            {release?.assets?.length > 0 && (
+            {downloadAsset && (
               <a
-                href={release.assets[0].browser_download_url}
+                href={downloadAsset.browser_download_url}
                 className="primary-btn"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img src={download} alt="Download" className="btn-icon" />
-                Download HSIDE
+                {getDownloadText()}
               </a>
             )}
-            <a href="#ai-capabilities" className="secondary-btn">
+            <button onClick={() => scrollToSection('ai-capabilities')} className="secondary-btn">
               Explore AI Features
-            </a>
+            </button>
           </div>
           <p className="hero-note">Supports Windows 10 & above • Cross-platform coming soon</p>
         </div>
@@ -71,7 +140,46 @@ function HSIDE() {
       </section>
 
       {/* AI Capabilities Section */}
+      <section id="ai-capabilities" className="ai-capabilities-section">
+        <div className="container">
+          <h2 className="section-title">AI-Powered Development</h2>
+          <p className="section-subtitle">Experience the future of coding with intelligent assistance</p>
+          
+          <div className="ai-features-grid">
+            <div className="ai-feature-card">
+              <div className="ai-feature-icon">
+                <span className="ai-emoji">🤖</span>
+              </div>
+              <h3>Smart Code Completion</h3>
+              <p>AI-powered suggestions that understand your coding patterns and project context.</p>
+            </div>
 
+            <div className="ai-feature-card">
+              <div className="ai-feature-icon">
+                <span className="ai-emoji">💬</span>
+              </div>
+              <h3>Natural Language Coding</h3>
+              <p>Describe what you want to build in plain English and watch the AI generate code.</p>
+            </div>
+
+            <div className="ai-feature-card">
+              <div className="ai-feature-icon">
+                <span className="ai-emoji">🔍</span>
+              </div>
+              <h3>Intelligent Debugging</h3>
+              <p>AI assistance in finding and fixing bugs with contextual explanations.</p>
+            </div>
+
+            <div className="ai-feature-card">
+              <div className="ai-feature-icon">
+                <span className="ai-emoji">📚</span>
+              </div>
+              <h3>Code Documentation</h3>
+              <p>Automatically generate comprehensive documentation for your Java projects.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section id="features" className="features-section">
@@ -176,15 +284,15 @@ function HSIDE() {
           <div className="download-content">
             <h2>Ready to experience the magic?</h2>
             <p>Download HSIDE today and transform your Java development workflow with AI-powered assistance.</p>
-            {release?.assets?.length > 0 && (
+            {downloadAsset && (
               <a
-                href={release.assets[0].browser_download_url}
+                href={downloadAsset.browser_download_url}
                 className="download-cta"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img src={download} alt="Download" className="btn-icon" />
-                Download HSIDE ({release.tag_name})
+                {getDownloadText()}
               </a>
             )}
             <div className="platform-info">
