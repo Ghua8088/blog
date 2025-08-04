@@ -15,6 +15,7 @@ import { Container } from 'react-bootstrap';
 import React from 'react';
 import HSIDE from './projects/HSIDE/hside';
 import Gdnet from './projects/gdnet/gdnet';
+import Mindful from './projects/mindful/mindful';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/manage" element={<BlogManager />} />
           <Route path="/projects/HSIDE" element={<HSIDE />} />
           <Route path="/projects/gdnet" element={<Gdnet/>} />
+          <Route path="/projects/mindful" element={<Mindful />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Container>
