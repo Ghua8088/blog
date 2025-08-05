@@ -523,5 +523,94 @@
         }
       ]
     }
+  },
+  {
+    "id": "hside-java-ide-journey",
+    "title": "HSIDE – My Personal Journey",
+    "date": "2025-08-05",
+    "description": "How a clunky Java framework led me down a fun rabbit hole of building my own IDE with Swing, Maven, FlatLaf, and even local AI integration.",
+    "thumbnail": "UI.png",
+    "content": {
+      "sections": [
+        {
+          "type": "heading",
+          "content": "What even is HSIDE?"
+        },
+        {
+          "type": "paragraph",
+          "content": "It was my third semester, and we had a Java course. One part of it covered Swing — an old, archaic framework that apparently boomed sometime in the early 2000s. The UI? Horrible. Clunky. Straight out of the Windows XP era.\n\nBut still, I was amazed. Despite how outdated it looked, I realized: you could actually build something *usable* with it. And that idea was enough to get me hooked."
+        },
+        {
+          "type": "heading",
+          "content": "Starting up"
+        },
+        {
+          "type": "paragraph",
+          "content": "I started exploring Swing's built-in features. My first goal? At least make a basic Notepad clone — and I actually pulled it off in 2 hours. It worked... but yeah, still looked like it was born in 2002.\n\nFunctional, but not something you’d want to stare at for hours."
+        },
+        {
+          "type": "heading",
+          "content": "How I made the UI not hurt my eyes"
+        },
+        {
+          "type": "paragraph",
+          "content": "Enter [Maven](https://mvnrepository.com/). I ended up spending *hours* — and I mean **15–20 hours** — just scrolling through cool Java packages. It turned into a hobby (or maybe a bad habit).\n\nThat’s when I stumbled on **FlatLaf** — a modern Look and Feel that powers JetBrains IDEs. It completely changed the vibe of the app. Suddenly, Swing didn’t feel so ancient anymore.\n\nFrom there, I went even deeper, finding all kinds of tweaks, themes, and UI toolkits. Felt like I was exploring a software museum."
+        },
+        {
+          "type": "heading",
+          "content": "More features? Of course."
+        },
+        {
+          "type": "paragraph",
+          "content": "I wanted to keep up with modern IDE trends — especially adding AI features.\n\nBut here’s the problem: **nothing’s free**. So I figured... if you can’t pay with money, just pay with electricity 😅\n\nThat’s when I found [Ollama](https://ollama.com/) — a beautifully simple, open-source way to run LLMs locally. Just `ollama pull <model>` and boom, you’ve got a language model running on your machine.\n\nEven better: it exposes a local port. Jackpot.\n\nI wired that into the IDE and built a basic inline AI autofill feature. It wasn’t fancy, but it worked. And yes — I used the **ancient** `jpackage` tool to wrap everything up. Don’t ask why. It just worked."
+        },
+        {
+          "type": "heading",
+          "content": "More and more (and more) refinement"
+        },
+        {
+          "type": "paragraph",
+          "content": "The app kept evolving. I added features like side panels, quick-access buttons, and other quality-of-life things to make it feel more like a real IDE.\n\nEventually, I migrated from a hardcoded build system to a proper Maven project. Clean, modular, and finally not breaking every 10 minutes."
+        },
+        {
+          "type": "heading",
+          "content": "Conclusion"
+        },
+        {
+          "type": "paragraph",
+          "content": "Building HSIDE has been one of the most fun and random side quests I’ve taken.\n\nIt started as an experiment with Swing — and turned into a mini-IDE with real UI, AI support, and a growing list of features. I’ve poured my free time and energy into it, and I’m still adding things as I go.\n\nIf you’re curious, check out the repo. Clone it. Break it. Improve it.\n\nLet’s turn this into a fun, weird, open-source IDE project. More the merrier. Happy coding 🥳"
+        },
+        {
+          "type": "list",
+          "content": "🪦 Swing – where it all started\n🎨 FlatLaf – saved the UI\n⚡ Maven – dependency heaven (and time sink)\n🤖 Ollama – AI, but make it local\n📦 jpackage – still works, somehow"
+        },
+        {
+          "type": "link",
+          "url": "https://github.com/yourusername/HSIDE",
+          "title": "HSIDE GitHub Repo",
+          "description": "Explore the source code, fork it, or contribute your own features."
+        },
+        {
+          "type": "link",
+          "url": "https://flatlaf.org/",
+          "title": "FlatLaf",
+          "description": "Modern Look and Feel library for Java Swing apps"
+        },
+        {
+          "type": "link",
+          "url": "https://ollama.com/",
+          "title": "Ollama",
+          "description": "Run language models locally with one-line commands"
+        },
+        {
+          "type": "link",
+          "url": "https://mvnrepository.com/",
+          "title": "Maven Repository",
+          "description": "Java’s package wonderland"
+        }
+      ]
+    }
   }
+  
+  
 ]
