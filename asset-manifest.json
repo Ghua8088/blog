@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/blog/static/css/main.fd87f9f9.css",
+    "main.css": "/blog/static/css/main.f7103aa0.css",
     "main.js": "/blog/static/js/main.a4c9e0e1.js",
     "static/media/gdnet.png": "/blog/static/media/gdnet.d2a2271957e49a4a514e.png",
     "static/media/deeplearning.png": "/blog/static/media/deeplearning.fb78132e10173a76d378.png",
@@ -21,11 +21,11 @@
     "static/media/linked-in.svg": "/blog/static/media/linked-in.394b6e3558ae07ec61acf961d784d622.svg",
     "static/media/send.svg": "/blog/static/media/send.ae2f36d7957837fbb716254c67643682.svg",
     "static/media/download.svg": "/blog/static/media/download.9bbbf07f572aa65fbf8029d40dc808e7.svg",
-    "main.fd87f9f9.css.map": "/blog/static/css/main.fd87f9f9.css.map",
+    "main.f7103aa0.css.map": "/blog/static/css/main.f7103aa0.css.map",
     "main.a4c9e0e1.js.map": "/blog/static/js/main.a4c9e0e1.js.map"
   },
   "entrypoints": [
-    "static/css/main.fd87f9f9.css",
+    "static/css/main.f7103aa0.css",
     "static/js/main.a4c9e0e1.js"
   ]
 }
