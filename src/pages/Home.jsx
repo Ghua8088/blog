@@ -30,7 +30,8 @@ export default function Home() {
                   className="blog-card-img"
                   style={{
                     height: '200px',
-                    objectFit: 'cover'
+                    objectFit: 'contain',
+                    backgroundColor: '#222'
                   }}
                 />
                 <Card.Body className="d-flex flex-column">

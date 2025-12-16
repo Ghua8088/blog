@@ -1,5 +1,12 @@
 [
     {
+        "id":"pytron-kit",
+        "title":"Pytron: A Native Desktop Framework for Python",
+        "description":"A lightweight desktop application framework that uses Python for logic and Web technologies for UI, without heavy runtimes.",
+        "thumbnail":"pytron_kit.png",
+        "url":"https://pytron-kit.github.io"
+    },
+    {
         "id": "gdnet",
         "title": "Simple Deep Learning Module named GDnet",
         "description": "An educational recreation of top deep learning libraries like TensorFlow and PyTorch, built from scratch without high-level optimizations.",
